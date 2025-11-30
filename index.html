@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>極簡天氣查詢系統</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>☁️ 城市天氣查詢</h1>
+        <div class="input-group">
+            <input type="text" id="city-input" placeholder="輸入城市名稱 (例如: Taipei)">
+            <button onclick="fetchWeather()">查詢</button>
+        </div>
+        
+        <div id="weather-result" class="result-box">
+            <p>請輸入城市名稱並點擊查詢。</p>
+        </div>
+        
+        <div id="error-message" class="error-box" style="display:none;"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
