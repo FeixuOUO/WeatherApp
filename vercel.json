@@ -8,7 +8,7 @@
     ],
     "routes": [
         {
-            "src": "/api/weather",
+            "src": "/api/(.*)",
             "dest": "api/weather.py"
         },
         {
