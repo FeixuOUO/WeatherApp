@@ -6,14 +6,14 @@
             "use": "@vercel/python",
             "config": {
                 "wsgiApplication": "api.app", 
-                "runtime": "python3.9" 
+                "runtime": "python3.11" // *** 修正 1: 使用較新的穩定版本 ***
             }
         }
     ],
     "routes": [
         {
             "src": "/api/(.*)", 
-            "dest": "api.py"
+            "dest": "api.py" // 匹配 /api/weather?city=... 並導向 api.py
         },
         {
             "src": "/(.*)",
