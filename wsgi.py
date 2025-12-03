@@ -5,10 +5,10 @@ import json
 import requests
 from flask import Flask, request, jsonify 
 from http import HTTPStatus
-from flask_cors import CORS 
+from flask_cors import CORS # 確保已導入
 
 app = Flask(__name__)
-CORS(app) # 啟用 CORS for all routes
+CORS(app) # 確保已啟用
 
 # 從環境變數中讀取 API Key (API Key MUST be set in Vercel settings)
 API_KEY = os.environ.get('OPENWEATHER_API_KEY')
@@ -21,10 +21,7 @@ def get_weather():
     Flask 路由處理 /api/weather 請求
     """
     
-    # 由於使用了 CORS(app)，Flask-CORS 會自動處理 OPTIONS 預檢請求，
-    # 這裡的邏輯只處理 GET 請求和錯誤。
-
-    # 1. 獲取查詢參數 (Flask 的 request.args.get() 更穩定)
+    # 1. 獲取查詢參數
     city = request.args.get('city')
 
     if not city:
@@ -47,8 +44,6 @@ def get_weather():
 
         # 3. 返回 JSON 數據給前端
         response_data = response.json()
-        
-        # jsonify 自動添加 CORS 標頭
         return jsonify(response_data)
 
     except requests.exceptions.HTTPError as e:
