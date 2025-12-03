@@ -5,7 +5,7 @@ import json
 import requests
 from flask import Flask, request, jsonify 
 from http import HTTPStatus
-from flask_cors import CORS # 確保已導入
+from flask_cors import CORS 
 
 app = Flask(__name__)
 CORS(app) # 確保已啟用
@@ -15,10 +15,11 @@ API_KEY = os.environ.get('OPENWEATHER_API_KEY')
 BASE_URL = "https://api.openweathermap.org/data/2.5/weather"
 
 
-@app.route('/api/weather', methods=['GET', 'OPTIONS'])
+# *** 最終修正：將路由從 '/api/weather' 改為 '/weather' ***
+@app.route('/weather', methods=['GET', 'OPTIONS'])
 def get_weather():
     """
-    Flask 路由處理 /api/weather 請求
+    Flask 路由處理 /weather 請求
     """
     
     # 1. 獲取查詢參數
@@ -28,6 +29,7 @@ def get_weather():
         return jsonify({'error': 'Missing city parameter'}), HTTPStatus.BAD_REQUEST
 
     if not API_KEY:
+        # Vercel 上的 API Key 錯誤，回傳 500
         return jsonify({'error': 'API Key not configured on the server'}), HTTPStatus.INTERNAL_SERVER_ERROR
 
     # 2. 構建 OpenWeatherMap 的 API 請求 URL 
